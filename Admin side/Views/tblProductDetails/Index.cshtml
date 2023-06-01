@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Admin_side.Models.tblProductDetail>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Pro = 1;
+}
+
+<h2 >PRODUCTS</h2>
+
+<p >
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" >
+    <tr >
+        <th style="margin-left:100px;">
+            @Html.DisplayNameFor(model => model.ProductName)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+
+                <img src="@Url.Content(item.ImageUrl)" alt="Alternate Text" class="img-thumbnail" width="25%" />
+
+            </td>
+            <td>
+                @*@Html.ActionLink("PRODUCTS", "Edit", new { id=item.ProductID })*@
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+
+            </td>
+        </tr>
+    }
+
+</table>

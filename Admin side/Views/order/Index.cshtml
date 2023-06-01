@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Admin_side.Models.tblorder>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Order = 1;
+}
+
+<h2>ORDER</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Product Name @*product name*@
+        </th>
+        <th>     
+           Receiver Name @*PAYMENT DETAIL MAIN JO NAME DAAL RHE HAIN*@
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_costumerdetails.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCategoryDetail.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblPayment_Details.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OID })
+        </td>
+    </tr>
+}
+
+</table>

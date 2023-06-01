@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbmsProject01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="subject" Type="varchar" MaxLength="20" />
+          <Property Name="Message" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_costumerdetails">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" />
+          <Property Name="Passwordd" Type="nvarchar" MaxLength="20" />
+          <Property Name="CP" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbladmin">
+          <Key>
+            <PropertyRef Name="AdminName" />
+          </Key>
+          <Property Name="AdminName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tblCategoryDetails">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="ProductDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageUrl" Type="varchar(max)" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="tblCustDetail_Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" />
+          <Property Name="CID" Type="int" />
+          <Property Name="Qty" Type="int" />
+        </EntityType>
+        <EntityType Name="tblorder">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="int" />
+          <Property Name="UID" Type="int" />
+          <Property Name="CID" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="Bill" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblPayment_Details">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="AccNumber" Type="bigint" />
+          <Property Name="BankName" Type="varchar" MaxLength="50" />
+          <Property Name="Mode" Type="varchar" MaxLength="20" />
+          <Property Name="CvvNo" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProductDetails">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="50" />
+          <Property Name="ImageUrl" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__tblCategory__PID__2B3F6F97">
+          <End Role="tblProductDetails" Type="Self.tblProductDetails" Multiplicity="0..1" />
+          <End Role="tblCategoryDetails" Type="Self.tblCategoryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProductDetails">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblCategoryDetails">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCustDeta__CID__31EC6D26">
+          <End Role="tblCategoryDetails" Type="Self.tblCategoryDetails" Multiplicity="0..1" />
+          <End Role="tblCustDetail_Cart" Type="Self.tblCustDetail_Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategoryDetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblCustDetail_Cart">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCustDeta__UID__30F848ED">
+          <End Role="tbl_costumerdetails" Type="Self.tbl_costumerdetails" Multiplicity="0..1" />
+          <End Role="tblCustDetail_Cart" Type="Self.tblCustDetail_Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_costumerdetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblCustDetail_Cart">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblorder__CID__628FA481">
+          <End Role="tblCategoryDetails" Type="Self.tblCategoryDetails" Multiplicity="0..1" />
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategoryDetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblorder__PID__6383C8BA">
+          <End Role="tblPayment_Details" Type="Self.tblPayment_Details" Multiplicity="0..1" />
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayment_Details">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblorder__UID__6477ECF3">
+          <End Role="tbl_costumerdetails" Type="Self.tbl_costumerdetails" Multiplicity="0..1" />
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_costumerdetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbmsProject01ModelStoreContainer">
+          <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_costumerdetails" EntityType="Self.tbl_costumerdetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbladmin" EntityType="Self.tbladmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCategoryDetails" EntityType="Self.tblCategoryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustDetail_Cart" EntityType="Self.tblCustDetail_Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblorder" EntityType="Self.tblorder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPayment_Details" EntityType="Self.tblPayment_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProductDetails" EntityType="Self.tblProductDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblCategory__PID__2B3F6F97" Association="Self.FK__tblCategory__PID__2B3F6F97">
+            <End Role="tblProductDetails" EntitySet="tblProductDetails" />
+            <End Role="tblCategoryDetails" EntitySet="tblCategoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCustDeta__CID__31EC6D26" Association="Self.FK__tblCustDeta__CID__31EC6D26">
+            <End Role="tblCategoryDetails" EntitySet="tblCategoryDetails" />
+            <End Role="tblCustDetail_Cart" EntitySet="tblCustDetail_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCustDeta__UID__30F848ED" Association="Self.FK__tblCustDeta__UID__30F848ED">
+            <End Role="tbl_costumerdetails" EntitySet="tbl_costumerdetails" />
+            <End Role="tblCustDetail_Cart" EntitySet="tblCustDetail_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblorder__CID__628FA481" Association="Self.FK__tblorder__CID__628FA481">
+            <End Role="tblCategoryDetails" EntitySet="tblCategoryDetails" />
+            <End Role="tblorder" EntitySet="tblorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblorder__PID__6383C8BA" Association="Self.FK__tblorder__PID__6383C8BA">
+            <End Role="tblPayment_Details" EntitySet="tblPayment_Details" />
+            <End Role="tblorder" EntitySet="tblorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblorder__UID__6477ECF3" Association="Self.FK__tblorder__UID__6477ECF3">
+            <End Role="tbl_costumerdetails" EntitySet="tbl_costumerdetails" />
+            <End Role="tblorder" EntitySet="tblorder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbmsProject01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_costumerdetails">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Passwordd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCustDetail_Cart" Relationship="Self.FK__tblCustDeta__UID__30F848ED" FromRole="tbl_costumerdetails" ToRole="tblCustDetail_Cart" />
+          <NavigationProperty Name="tblorders" Relationship="Self.FK__tblorder__UID__6477ECF3" FromRole="tbl_costumerdetails" ToRole="tblorder" />
+        </EntityType>
+        <EntityType Name="tbladmin">
+          <Key>
+            <PropertyRef Name="AdminName" />
+          </Key>
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblCategoryDetail">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="ProductDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="tblProductDetail" Relationship="Self.FK__tblCategory__PID__2B3F6F97" FromRole="tblCategoryDetails" ToRole="tblProductDetails" />
+          <NavigationProperty Name="tblCustDetail_Cart" Relationship="Self.FK__tblCustDeta__CID__31EC6D26" FromRole="tblCategoryDetails" ToRole="tblCustDetail_Cart" />
+          <NavigationProperty Name="tblorders" Relationship="Self.FK__tblorder__CID__628FA481" FromRole="tblCategoryDetails" ToRole="tblorder" />
+        </EntityType>
+        <EntityType Name="tblCustDetail_Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" />
+          <Property Name="CID" Type="Int32" />
+          <Property Name="Qty" Type="Int32" />
+          <NavigationProperty Name="tbl_costumerdetails" Relationship="Self.FK__tblCustDeta__UID__30F848ED" FromRole="tblCustDetail_Cart" ToRole="tbl_costumerdetails" />
+          <NavigationProperty Name="tblCategoryDetail" Relationship="Self.FK__tblCustDeta__CID__31EC6D26" FromRole="tblCustDetail_Cart" ToRole="tblCategoryDetails" />
+        </EntityType>
+        <EntityType Name="tblorder">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="UID" Type="Int32" />
+          <Property Name="CID" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Bill" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_costumerdetails" Relationship="Self.FK__tblorder__UID__6477ECF3" FromRole="tblorder" ToRole="tbl_costumerdetails" />
+          <NavigationProperty Name="tblCategoryDetail" Relationship="Self.FK__tblorder__CID__628FA481" FromRole="tblorder" ToRole="tblCategoryDetails" />
+          <NavigationProperty Name="tblPayment_Details" Relationship="Self.FK__tblorder__PID__6383C8BA" FromRole="tblorder" ToRole="tblPayment_Details" />
+        </EntityType>
+        <EntityType Name="tblPayment_Details">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccNumber" Type="Int64" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CvvNo" Type="Int32" />
+          <NavigationProperty Name="tblorders" Relationship="Self.FK__tblorder__PID__6383C8BA" FromRole="tblPayment_Details" ToRole="tblorder" />
+        </EntityType>
+        <EntityType Name="tblProductDetail">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCategoryDetails" Relationship="Self.FK__tblCategory__PID__2B3F6F97" FromRole="tblProductDetails" ToRole="tblCategoryDetails" />
+        </EntityType>
+        <Association Name="FK__tblCustDeta__UID__30F848ED">
+          <End Role="tbl_costumerdetails" Type="Self.tbl_costumerdetails" Multiplicity="0..1" />
+          <End Role="tblCustDetail_Cart" Type="Self.tblCustDetail_Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_costumerdetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblCustDetail_Cart">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblorder__UID__6477ECF3">
+          <End Role="tbl_costumerdetails" Type="Self.tbl_costumerdetails" Multiplicity="0..1" />
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_costumerdetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCategory__PID__2B3F6F97">
+          <End Role="tblProductDetails" Type="Self.tblProductDetail" Multiplicity="0..1" />
+          <End Role="tblCategoryDetails" Type="Self.tblCategoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProductDetails">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblCategoryDetails">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCustDeta__CID__31EC6D26">
+          <End Role="tblCategoryDetails" Type="Self.tblCategoryDetail" Multiplicity="0..1" />
+          <End Role="tblCustDetail_Cart" Type="Self.tblCustDetail_Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategoryDetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblCustDetail_Cart">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblorder__CID__628FA481">
+          <End Role="tblCategoryDetails" Type="Self.tblCategoryDetail" Multiplicity="0..1" />
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategoryDetails">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblorder__PID__6383C8BA">
+          <End Role="tblPayment_Details" Type="Self.tblPayment_Details" Multiplicity="0..1" />
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayment_Details">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbmsProject01Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="contacts" EntityType="Self.contact" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbl_costumerdetails" EntityType="Self.tbl_costumerdetails" />
+          <EntitySet Name="tbladmins" EntityType="Self.tbladmin" />
+          <EntitySet Name="tblCategoryDetails" EntityType="Self.tblCategoryDetail" />
+          <EntitySet Name="tblCustDetail_Cart" EntityType="Self.tblCustDetail_Cart" />
+          <EntitySet Name="tblorders" EntityType="Self.tblorder" />
+          <EntitySet Name="tblPayment_Details" EntityType="Self.tblPayment_Details" />
+          <EntitySet Name="tblProductDetails" EntityType="Self.tblProductDetail" />
+          <AssociationSet Name="FK__tblCustDeta__UID__30F848ED" Association="Self.FK__tblCustDeta__UID__30F848ED">
+            <End Role="tbl_costumerdetails" EntitySet="tbl_costumerdetails" />
+            <End Role="tblCustDetail_Cart" EntitySet="tblCustDetail_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblorder__UID__6477ECF3" Association="Self.FK__tblorder__UID__6477ECF3">
+            <End Role="tbl_costumerdetails" EntitySet="tbl_costumerdetails" />
+            <End Role="tblorder" EntitySet="tblorders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCategory__PID__2B3F6F97" Association="Self.FK__tblCategory__PID__2B3F6F97">
+            <End Role="tblProductDetails" EntitySet="tblProductDetails" />
+            <End Role="tblCategoryDetails" EntitySet="tblCategoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCustDeta__CID__31EC6D26" Association="Self.FK__tblCustDeta__CID__31EC6D26">
+            <End Role="tblCategoryDetails" EntitySet="tblCategoryDetails" />
+            <End Role="tblCustDetail_Cart" EntitySet="tblCustDetail_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblorder__CID__628FA481" Association="Self.FK__tblorder__CID__628FA481">
+            <End Role="tblCategoryDetails" EntitySet="tblCategoryDetails" />
+            <End Role="tblorder" EntitySet="tblorders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblorder__PID__6383C8BA" Association="Self.FK__tblorder__PID__6383C8BA">
+            <End Role="tblPayment_Details" EntitySet="tblPayment_Details" />
+            <End Role="tblorder" EntitySet="tblorders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbmsProject01ModelStoreContainer" CdmEntityContainer="dbmsProject01Entities2">
+          <EntitySetMapping Name="contacts">
+            <EntityTypeMapping TypeName="dbmsProject01Model.contact">
+              <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbmsProject01Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_costumerdetails">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tbl_costumerdetails">
+              <MappingFragment StoreEntitySet="tbl_costumerdetails">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Passwordd" ColumnName="Passwordd" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbladmins">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tbladmin">
+              <MappingFragment StoreEntitySet="tbladmin">
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCategoryDetails">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tblCategoryDetail">
+              <MappingFragment StoreEntitySet="tblCategoryDetails">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustDetail_Cart">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tblCustDetail_Cart">
+              <MappingFragment StoreEntitySet="tblCustDetail_Cart">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblorders">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tblorder">
+              <MappingFragment StoreEntitySet="tblorder">
+                <ScalarProperty Name="OID" ColumnName="OID" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Bill" ColumnName="Bill" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPayment_Details">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tblPayment_Details">
+              <MappingFragment StoreEntitySet="tblPayment_Details">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AccNumber" ColumnName="AccNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="CvvNo" ColumnName="CvvNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProductDetails">
+            <EntityTypeMapping TypeName="dbmsProject01Model.tblProductDetail">
+              <MappingFragment StoreEntitySet="tblProductDetails">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

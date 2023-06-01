@@ -1,0 +1,54 @@
+﻿@model Admin_side.Models.tblProductDetail
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.Pro = 1;
+}
+
+<h2>ADD NEW PRODUCT</h2>
+
+
+@using (Html.BeginForm("Create", "tblProductDetails", FormMethod.Post, new {enctype="multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName)
+                @Html.ValidationMessageFor(model => model.ProductName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.TextBoxFor(model => model.Imagefile, new { type = "file" })
+                @Html.ValidationMessageFor(model => model.Imagefile)*@
+                <input type="file" required name="Imagefile" />
+                @*@Html.EditorFor(model => model.ImageUrl)
+                @Html.ValidationMessageFor(model => model.ImageUrl)*@
+            </div>
+        </div>
+
+        <div class="form-group">            
+            <div class="col-md-offset-2 col-md-10">                
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

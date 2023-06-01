@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b58e3c2cded4f8bafcbd92a446f0572" Name="Diagram1">
+        <EntityTypeShape EntityType="dbmsProject01Model.contact" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.sysdiagram" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tbl_costumerdetails" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tbladmin" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tblCategoryDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tblCustDetail_Cart" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tblorder" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tblPayment_Details" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmsProject01Model.tblProductDetail" Width="1.5" PointX="1.5" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="dbmsProject01Model.FK__tblCustDeta__UID__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmsProject01Model.FK__tblorder__UID__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmsProject01Model.FK__tblCategory__PID__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmsProject01Model.FK__tblCustDeta__CID__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmsProject01Model.FK__tblorder__CID__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmsProject01Model.FK__tblorder__PID__6383C8BA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

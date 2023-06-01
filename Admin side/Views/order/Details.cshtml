@@ -1,0 +1,67 @@
+﻿@model Admin_side.Models.tblorder
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Order = 1;
+}
+
+<h2>Details</h2>
+
+<div>
+    
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_costumerdetails.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_costumerdetails.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCategoryDetail.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCategoryDetail.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblPayment_Details.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblPayment_Details.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

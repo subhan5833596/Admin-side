@@ -1,0 +1,92 @@
+﻿@model Admin_side.Models.tbladmin
+
+@{
+    ViewBag.Title = "Adminlogin";
+    Layout=null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>LOGIN</title>
+    <link href="~/Login%20Template/css/style.css" rel="stylesheet" />
+    <script src="~/Login%20Template/js/fontawesome.js"></script>
+</head>
+<body>
+    
+    <div class="signinform">
+        <h2 style="padding-left:100px; font-size:40px;">ASUB MART MANAGEMENT</h2>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>ADMIN LOGIN     <br/></h2>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                         <div class="input-group">
+
+        @if (ViewBag.Message != null)
+        {
+            @ViewBag.Message
+        }
+        <hr />
+        @Html.ValidationSummary(true)
+
+
+        <div class="input-group">
+            @Html.LabelFor(model => model.AdminName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdminName)
+                @Html.ValidationMessageFor(model => model.AdminName)
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="input-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <input type="submit" value="Save" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </div>
+                    }
+
+
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p>
+                &copy;ASUB MART MANAGEMENT. All Rights Reserved. Designed by
+                <a class="text-primary" href="http://localhost:49794/Home/Adminlogin">ASUB Mart Management</a>
+            </p>
+        </div>
+        <!-- footer -->
+    </div>
+    <script src="~/Login%20Template/js/fontawesome.js"></script>
+</body>
+</html>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
