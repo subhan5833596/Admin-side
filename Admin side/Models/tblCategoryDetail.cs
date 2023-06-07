@@ -11,6 +11,10 @@ namespace Admin_side.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Web;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class tblCategoryDetail
     {
@@ -26,6 +30,7 @@ namespace Admin_side.Models
         public string Name { get; set; }
         public Nullable<int> Qty { get; set; }
         public string ProductDescription { get; set; }
+        [DisplayName("Upload Image")]
         public string ImageUrl { get; set; }
 
         public HttpPostedFileBase Imagefile { get; set; }
