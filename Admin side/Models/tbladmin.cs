@@ -11,12 +11,14 @@ namespace Admin_side.Models
 {
     using System;
     using System.Collections.Generic;
+    
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class tbladmin
     {
         //hahahahah
+        //HANAAAA
         //why not showing me 
         [Required(ErrorMessage = "USERNAME REQUIRED")]
         public string AdminName { get; set; }
