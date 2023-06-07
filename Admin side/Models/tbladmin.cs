@@ -16,7 +16,8 @@ namespace Admin_side.Models
     
     public partial class tbladmin
     {
-        
+        //hahahahah
+        //why not showing me 
         [Required(ErrorMessage = "USERNAME REQUIRED")]
         public string AdminName { get; set; }
         [Required(ErrorMessage = "INVALID PASSWORD")]
