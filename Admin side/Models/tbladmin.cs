@@ -11,10 +11,15 @@ namespace Admin_side.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class tbladmin
     {
+        
+        [Required(ErrorMessage = "USERNAME REQUIRED")]
         public string AdminName { get; set; }
+        [Required(ErrorMessage = "INVALID PASSWORD")]
         public string Password { get; set; }
     }
 }
