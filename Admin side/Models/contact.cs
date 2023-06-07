@@ -11,12 +11,18 @@ namespace Admin_side.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class contact
     {
-        public int CID { get; set; }
+         public int CID { get; set; }
+        [Required(ErrorMessage = "INVALID EMAIL")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required(ErrorMessage = "SUBJECT NECESSARY")]
         public string subject { get; set; }
+        [Required(ErrorMessage = "MESSAGE NECESSARY")]
         public string Message { get; set; }
     }
 }
