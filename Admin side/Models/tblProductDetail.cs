@@ -11,7 +11,9 @@ namespace Admin_side.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+   
     public partial class tblProductDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,7 @@ namespace Admin_side.Models
         }
     
         public int ProductID { get; set; }
+         [Required(ErrorMessage = "PRODUCT NAME REQUIRED")]
         public string ProductName { get; set; }
         public string ImageUrl { get; set; }
 
